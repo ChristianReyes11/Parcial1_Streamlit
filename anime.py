@@ -20,7 +20,7 @@ def load_data(nrows):
 
 
 def filter_data_by_anime(anime):
-    filtered_data_anime = data[data['anime'].str.upper().str.contains(anime)]
+    filtered_data_anime = data[data['name'].str.upper().str.contains(anime)]
     return filtered_data_anime
 
 
