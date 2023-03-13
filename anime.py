@@ -19,40 +19,40 @@ def load_data(nrows):
     return data
 
 
-def filter_data_by_filme(filme):
-    filtered_data_filme = data[data['name'].str.upper().str.contains(filme)]
-    return filtered_data_filme
+def filter_data_by_anime(anime):
+    filtered_data_anime = data[data['anime'].str.upper().str.contains(anime)]
+    return filtered_data_anime
 
 
-def filter_data_by_director(director):
-    filtered_data_director = data[data['director'] == director]
-    return filtered_data_director
+def filter_data_by_genre(genre):
+    filtered_data_genre = data[data['genre'] == genre]
+    return filtered_data_genre
 
 
 data_load_state = st.text('Loading...')
 data = load_data(500)
 data_load_state.text("Done!")
 
-if st.sidebar.checkbox('Mostrar filmes'):
-    st.subheader('Todos los filmes')
+if st.sidebar.checkbox('Mostrar Animes'):
+    st.subheader('Todos los Animes')
     st.write(data)
 
-titulofilme = st.sidebar.text_input('Titulo del filme :')
-btnBuscar = st.sidebar.button('Buscar filmes')
+titulofilme = st.sidebar.text_input('Titulo del Anime :')
+btnBuscar = st.sidebar.button('Buscar Animes')
 
 if (btnBuscar):
-    data_filme = filter_data_by_filme(titulofilme.upper())
-    count_row = data_filme.shape[0]
+    data_anime = filter_data_by_anime(tituloanime.upper())
+    count_row = data_anime.shape[0]
     st.write(f"Total mostrados : {count_row}")
-    st.write(data_filme)
+    st.write(data_anime)
 
-selected_director = st.sidebar.selectbox(
-    "Seleccionar Director", data['director'].unique())
-btnFilterbyDirector = st.sidebar.button('Filtrar director ')
+selected_genre = st.sidebar.selectbox(
+    "Seleccionar Genero", data['genre'].unique())
+btnFilterbyGenre = st.sidebar.button('Filtrar genero ')
 
-if (btnFilterbyDirector):
-    filterbydir = filter_data_by_director(selected_director)
-    count_row = filterbydir.shape[0]
-    st.write(f"Total filmes : {count_row}")
+if (btnFilterbyGenre):
+    filterbygen = filter_data_by_genre(selected_genre)
+    count_row = filterbygen.shape[0]
+    st.write(f"Total Animes : {count_row}")
 
-    st.dataframe(filterbydir)
+    st.dataframe(filterbygen)
